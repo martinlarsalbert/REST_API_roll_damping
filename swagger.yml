@@ -2,7 +2,7 @@ swagger: "2.0"
 info:
   description: This is the swagger file that goes with our server code
   version: "1.0.0"
-  title: Swagger ReST Article
+  title: Roll damping prediction
 consumes:
   - application/json
 produces:
@@ -17,8 +17,8 @@ paths:
       operationId: roll_damping.predict
       tags:
         - roll_damping
-      summary: Read one person from the roll_damping list
-      description: Read one person from the roll_damping list
+      summary: Predict the roll damping of a ship, based on its main dimensions.
+      description: Make prediction for one ship.
       parameters:
         - name: lpp
           in: query
@@ -27,7 +27,7 @@ paths:
           required: True
       responses:
         200:
-          description: Successfully read person from roll_damping list operation
+          description: Successfully predicted the rolldamping for this ship.
           schema:
             properties:
               lpp:
