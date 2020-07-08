@@ -49,8 +49,10 @@ def predict(lpp, beam, T, BK_L, BK_B, OG, omega0_hat, C_b, A_0, V, phi_a):
         'B_e_hat':damping,
     }
 
+    results.update(inputs)
+
     if lpp>0:
-        results['lpp']=lpp
+        pass
 
     # otherwise, nope, not found
     else:
