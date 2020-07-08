@@ -9,6 +9,8 @@ from datetime import datetime
 # 3rd party modules
 from flask import make_response, abort
 
+# My modules
+from rolldecayestimators.polynom_estimator import Polynom
 
 def get_timestamp():
     return datetime.now().strftime(("%Y-%m-%d %H:%M:%S"))
@@ -44,6 +46,12 @@ def predict(lpp):
 
     damping = {}
 
+    file_path = 'polynom_complex.sym'
+    inputs={
+
+    }
+    make_prediction(file_path=file_path, inputs=inputs)
+
     if lpp>0:
         damping['lpp']=lpp
 
@@ -57,4 +65,11 @@ def predict(lpp):
     return damping
 
 
+def make_prediction(file_path:str, inputs:dict):
+
+    polynom = Polynom.load(file_path=file_path)
+    assert isinstance(polynom,Polynom)
+
+    result = polynom.predict(X=inputs)
+    return result
 
