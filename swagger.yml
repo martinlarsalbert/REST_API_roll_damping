@@ -25,6 +25,67 @@ paths:
           description: Ship perpendicular length [m]
           type: number
           required: True
+
+        - name: beam
+          in: query
+          description: Ship beam [m]
+          type: number
+          required: True
+
+        - name: T
+          in: query
+          description: Ship draught [m]
+          type: number
+          required: True
+
+        - name: BK_L
+          in: query
+          description: Bilge keel length [m]
+          type: number
+          required: True
+
+        - name: BK_B
+          in: query
+          description: Bilge keel height [m]
+          type: number
+          required: True
+
+        - name: OG
+          in: query
+          description: distance from the still water level O to the roll axis G [m]
+          type: number
+          required: True
+
+        - name: omega0_hat
+          in: query
+          description: Nondimensional frequency of motion (OMEGAHAT = OMEGA * SQRT(BRTH / 2 / 9.81))
+          type: number
+          required: True
+
+        - name: C_b
+          in: query
+          description: Block coefficient [-]
+          type: number
+          required: True
+
+        - name: A_0
+          in: query
+          description: Middship coefficient (A_m/(B*d) [-]
+          type: number
+          required: True
+
+        - name: V
+          in: query
+          description: ship speed [m/s]
+          type: number
+          required: True
+
+        - name: phi_a
+          in: query
+          description: Roll amplitude [rad]
+          type: number
+          required: True
+
       responses:
         200:
           description: Successfully predicted the rolldamping for this ship.
