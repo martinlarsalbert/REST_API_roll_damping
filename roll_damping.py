@@ -5,6 +5,7 @@ PEOPLE collection
 
 # System modules
 from datetime import datetime
+import os
 
 # 3rd party modules
 from flask import make_response, abort
@@ -12,6 +13,10 @@ import numpy as np
 
 # My modules
 from rolldecayestimators.polynom_estimator import Polynom
+
+file_path = os.path.join(os.path.dirname(__file__),'static','models','polynom_complex.sym')
+polynom = Polynom.load(file_path=file_path)
+assert isinstance(polynom, Polynom)
 
 def get_timestamp():
     return datetime.now().strftime(("%Y-%m-%d %H:%M:%S"))
@@ -25,7 +30,6 @@ def predict(lpp, beam, T, BK_L, BK_B, OG, omega0_hat, C_b, A_0, V, phi_a):
     :return:      ship roll damping prediction
     """
 
-    file_path = 'static/models/polynom_complex.sym'
     inputs = {
         'beam': beam/lpp,
         'T': T/lpp,
@@ -38,7 +42,7 @@ def predict(lpp, beam, T, BK_L, BK_B, OG, omega0_hat, C_b, A_0, V, phi_a):
         'V': V/np.sqrt(lpp),
         'phi_a': phi_a,
     }
-    damping = make_prediction(file_path=file_path, inputs=inputs)
+    damping = make_prediction(inputs=inputs)
 
     results = {
         'method':file_path,
@@ -58,10 +62,7 @@ def predict(lpp, beam, T, BK_L, BK_B, OG, omega0_hat, C_b, A_0, V, phi_a):
     return results
 
 
-def make_prediction(file_path:str, inputs:dict):
-
-    polynom = Polynom.load(file_path=file_path)
-    assert isinstance(polynom,Polynom)
+def make_prediction(inputs:dict):
 
     result = polynom.predict(X=inputs)
     return result

@@ -27,4 +27,4 @@ def test_make_prediction():
 
     }
 
-    result = roll_damping.make_prediction(file_path=file_path,  inputs=inputs)
+    result = roll_damping.make_prediction(inputs=inputs)
