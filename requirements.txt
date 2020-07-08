@@ -4,3 +4,4 @@ connexion[swagger-ui]
 requests
 pytest
 rolldecay-estimators
+jupyter
