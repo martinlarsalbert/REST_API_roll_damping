@@ -69,3 +69,7 @@ def make_prediction(inputs:dict):
     result = polynom.predict(X=inputs)
     return result
 
+def precict_many(ship):
+
+    a=1
+
