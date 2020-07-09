@@ -6,6 +6,7 @@ PEOPLE collection
 # System modules
 from datetime import datetime
 import os
+import pandas as pd
 
 # 3rd party modules
 from flask import make_response, abort
@@ -69,7 +70,13 @@ def make_prediction(inputs:dict):
     result = polynom.predict(X=inputs)
     return result
 
-def precict_many(ship):
+def precict_many(ships):
 
-    a=1
+    inputs = pd.DataFrame(ships)
+    dampings = make_prediction(inputs=inputs)
+    inputs['B_e_hat']=dampings
+
+    outputs = [record for record in inputs.to_dict('records')]
+
+    return outputs
 
