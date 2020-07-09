@@ -32,16 +32,17 @@ def predict(lpp, beam, T, BK_L, BK_B, OG, omega0_hat, C_b, A_0, V, phi_a):
     """
 
     inputs = {
-        'beam': beam/lpp,
-        'T': T/lpp,
-        'BK_L': BK_L/lpp,
-        'BK_B': BK_B/lpp,
-        'OG': OG/lpp,
+        'beam': beam,
+        'T': T,
+        'BK_L': BK_L,
+        'BK_B': BK_B,
+        'OG': OG,
         'omega0_hat': omega0_hat,
         'C_b': C_b,
         'A_0': A_0,
-        'V': V/np.sqrt(lpp),
+        'V': V,
         'phi_a': phi_a,
+        'lpp':lpp,
     }
     damping = make_prediction(inputs=inputs)
 
@@ -67,12 +68,25 @@ def predict(lpp, beam, T, BK_L, BK_B, OG, omega0_hat, C_b, A_0, V, phi_a):
 
 def make_prediction(inputs:dict):
 
+    inputs=inputs.copy()
+
+    lpp=inputs['lpp']
+    inputs['beam']/=lpp
+    inputs['BK_L']/=lpp
+    inputs['BK_B'] /= lpp
+    inputs['OG'] /= lpp
+    inputs['T'] /= lpp
+    inputs['V'] /= np.sqrt(lpp)
+    inputs.pop('lpp')
+
     result = polynom.predict(X=inputs)
     return result
 
 def precict_many(ships):
 
     inputs = pd.DataFrame(ships)
+
+
     dampings = make_prediction(inputs=inputs)
     inputs['B_e_hat']=dampings
 

@@ -23,7 +23,8 @@ def test_make_prediction():
         'C_b':0.7,
         'A_0':0.97,
         'V':0,
-        'phi_a':np.deg2rad(3)
+        'phi_a':np.deg2rad(3),
+        'lpp':100,
 
     }
 
